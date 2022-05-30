@@ -5,18 +5,27 @@
  */
 package com.kaua.OSApiApplication.domain.model;
 
+import javax.persistence.*;
+
 /**
  *
  * @author devsys-b
  */
+
+@Entity
 public class Cliente {
     
     public Cliente(){
+        //Contrutor Default
     }
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;
     private String email;
+    
+    @Column(name = "telefone")
     private String fone;
 
     public Cliente(long id, String nome, String email, String fone) {
