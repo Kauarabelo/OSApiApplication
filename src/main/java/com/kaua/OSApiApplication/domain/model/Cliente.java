@@ -15,9 +15,6 @@ import javax.persistence.*;
 @Entity
 public class Cliente {
     
-    public Cliente(){
-        //Contrutor Default
-    }
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +25,10 @@ public class Cliente {
     @Column(name = "telefone")
     private String fone;
 
+    public Cliente(){
+        //Contrutor Default
+    }
+    
     public Cliente(long id, String nome, String email, String fone) {
         this.id = id;
         this.nome = nome;
