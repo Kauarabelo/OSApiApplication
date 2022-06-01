@@ -9,6 +9,7 @@ import com.kaua.OSApiApplication.domain.model.Cliente;
 import com.kaua.OSApiApplication.domain.repository.ClienteRepository;
 import java.util.List;
 import java.util.Optional;
+import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -47,10 +48,39 @@ public class ClienteController {
     
     @PostMapping("/clientes")
     @ResponseStatus(HttpStatus.CREATED)
-    public Cliente adicionar(@RequestBody Cliente cliente){
+    public Cliente adicionar(@Valid @RequestBody Cliente cliente){
         
         return clienteRepository.save(cliente);
         
     }
+    
+    @PutMapping("/clientes/{clienteID}")
+    public ResponseEntity<Cliente> atualizar(@Valid @PathVariable Long clienteID,
+            @RequestBody Cliente cliente){
+    
+        //Verifica se o cliente existe
+        if (!clienteRepository.existsById(clienteID)) {
+            return ResponseEntity.notFound().build();
+        }
+        
+        cliente.setId(clienteID);
+        cliente = clienteRepository.save(cliente);
+        return ResponseEntity.ok(cliente);
+        
+    }
+    
+    @DeleteMapping("/clientes/{clienteID}")
+    public ResponseEntity<Void> excluir(@PathVariable Long clienteID){
+    
+        //Verifica se cliente existe ou não
+        if (!clienteRepository.existsById(clienteID)){
+            return ResponseEntity.notFound().build();
+        }
+        
+        clienteRepository.deleteById(clienteID);
+        return ResponseEntity.noContent().build();
+        
+    }
+           
 
 }

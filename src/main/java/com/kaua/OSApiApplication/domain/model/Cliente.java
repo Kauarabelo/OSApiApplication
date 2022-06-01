@@ -6,6 +6,10 @@
 package com.kaua.OSApiApplication.domain.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 
 /**
  *
@@ -19,9 +23,18 @@ public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    
+    @NotNull
+    @Size(max = 60)
     private String nome;
+    
+    @NotNull
+    @Email
+    @Size(max = 255)
     private String email;
     
+    @NotNull
+    @Size(max = 20)
     @Column(name = "telefone")
     private String fone;
 
