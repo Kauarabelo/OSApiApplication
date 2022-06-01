@@ -25,7 +25,7 @@ public class Cliente {
     private long id;
     
     @NotBlank
-    @Size(max = 60)
+    @Size(max = 20)
     private String nome;
     
     @NotBlank
@@ -34,19 +34,29 @@ public class Cliente {
     private String email;
     
     @NotBlank
-    @Size(max = 20)
+    @Size(max = 11, min = 11)
     @Column(name = "telefone")
     private String fone;
+    
+    @NotBlank
+    @Size(max = 3, min = 2)
+    private String ddd;
+    
+    @NotBlank
+    @Size(max = 30)
+    private String sobrenome;
 
     public Cliente(){
         //Contrutor Default
     }
     
-    public Cliente(long id, String nome, String email, String fone) {
+    public Cliente(long id, String nome, String email, String fone, String sobrenome) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.fone = fone;
+        this.sobrenome = sobrenome;
+        this.ddd = ddd;
     }
 
     public long getId() {
@@ -79,6 +89,18 @@ public class Cliente {
 
     public void setFone(String fone) {
         this.fone = fone;
+    }
+    
+    public String getSobrenome() {
+        return sobrenome;
+    }
+
+    public void setSobrenome(String sobrenome) {
+        this.sobrenome = sobrenome;
+    }
+
+    public String getDdd() {
+        return ddd;
     }
 
     @Override
