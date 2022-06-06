@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -7,6 +8,7 @@ package com.kaua.OSApiApplication.api.controller;
 
 import com.kaua.OSApiApplication.domain.model.Cliente;
 import com.kaua.OSApiApplication.domain.repository.ClienteRepository;
+import com.kaua.OSApiApplication.domain.service.ClienteService;
 import java.util.List;
 import java.util.Optional;
 import javax.validation.Valid;
@@ -24,6 +26,9 @@ public class ClienteController {
 
     @Autowired
     private ClienteRepository clienteRepository;
+    
+    @Autowired
+    private ClienteService clienteService;
 
     @GetMapping("/clientes")
     public List<Cliente> listas() {
@@ -50,7 +55,7 @@ public class ClienteController {
     @ResponseStatus(HttpStatus.CREATED)
     public Cliente adicionar(@Valid @RequestBody Cliente cliente){
         
-        return clienteRepository.save(cliente);
+        return clienteService.salvar(cliente);
         
     }
     
@@ -64,7 +69,7 @@ public class ClienteController {
         }
         
         cliente.setId(clienteID);
-        cliente = clienteRepository.save(cliente);
+        cliente = clienteService.salvar(cliente);
         return ResponseEntity.ok(cliente);
         
     }
@@ -77,7 +82,7 @@ public class ClienteController {
             return ResponseEntity.notFound().build();
         }
         
-        clienteRepository.deleteById(clienteID);
+        clienteService.excluir(clienteID);
         return ResponseEntity.noContent().build();
         
     }
