@@ -55,7 +55,7 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<Object> handleDomainException(DomainException ex, WebRequest request) {
         var status = HttpStatus.BAD_REQUEST;
         ProblemaException problema = new ProblemaException();
-        problema.setCampos((status.value()));
+        problema.setStatus(status.value());
         problema.setTitulo(ex.getMessage());
         problema.setDataHora(LocalDateTime.now());
 
