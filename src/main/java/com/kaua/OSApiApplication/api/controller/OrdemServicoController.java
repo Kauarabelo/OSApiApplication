@@ -40,30 +40,27 @@ public class OrdemServicoController {
         return ordemServicoService.criar(ordemServico);
     }
 
-    @PutMapping("/ordem-servico/finalizar/{ordemID}")
-    public ResponseEntity<OrdemServico> finalizar(@Valid @PathVariable Long ordemID, OrdemServico ordemServico) {
-
+    @PutMapping("/ordem-servico/finalizar/{ordemid}")
+    public ResponseEntity<OrdemServico> finalizar(@Valid @PathVariable Long ordemid, @RequestBody OrdemServico ordemServico) {
         //Verifica se existe a ordem de servico
-        if(!ordemServicoRepository.existsById(ordemID)){
+        if(!ordemServicoRepository.existsById(ordemid)){
             return ResponseEntity.notFound().build();
         }
         
-        ordemServico.setId(ordemID);
-        ordemServico = ordemServicoService.salvarFinalizar(ordemServico);
-        return ResponseEntity.ok(ordemServico);
+        ordemServico.setId(ordemid);
+        return ordemServicoService.salvarFinalizar(ordemServico);
     }
 
     @PutMapping("/ordem-servico/cancelar/{ordemID}")
-    public ResponseEntity<OrdemServico> cancelar(@Valid @PathVariable Long ordemID, OrdemServico ordemServico) {
-
+    public ResponseEntity<OrdemServico> cancelar(@Valid @PathVariable Long ordemID, @RequestBody OrdemServico ordemServico) {
         //Verifica se existe a ordem de servico
         if(!ordemServicoRepository.existsById(ordemID)){
             return ResponseEntity.notFound().build();
         }
         
         ordemServico.setId(ordemID);
-        ordemServico = ordemServicoService.salvarCancelar(ordemServico);
-        return ResponseEntity.ok(ordemServico);
+        
+        return ordemServicoService.salvarCancelar(ordemServico);
     }
 
 }

@@ -6,7 +6,6 @@
 package com.kaua.OSApiApplication.domain.repository;
 
 import com.kaua.OSApiApplication.domain.model.OrdemServico;
-import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
